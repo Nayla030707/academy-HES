@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HES Academy - Edukasi Hukum Inklusif & Interaktif</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            50: '#f0f4fd',
+                            100: '#dae5fa',
+                            200: '#bdcff5',
+                            300: '#90aeef',
+                            400: '#5e85e6',
+                            500: '#1A3A8A', /* Warna Utama PRD */
+                            600: '#152e6e',
+                            700: '#112558',
+                            800: '#0d1c43',
+                            900: '#070f25',
+                        },
+                        grayLight: '#F8F9FA', /* Warna Pendukung PRD */
+                        grayBorder: '#E9ECEF',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 30px -10px rgba(26, 58, 138, 0.08)',
+                        'hover-card': '0 20px 40px -15px rgba(26, 58, 138, 0.15)',
+                        'glow': '0 0 25px rgba(94, 133, 230, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth, Hardware-Accelerated Reveal Core classes */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            will-change: transform, opacity;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered Delay Helpers */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+
+        /* Floating Animation for Hero SVG Illustration */
+        @keyframes floatHero {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(1deg);
+            }
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        .animate-float-hero {
+            animation: floatHero 6s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        /* Preloader Specifics */
+        @keyframes pulseGavel {
+            0%, 100% {
+                transform: scale(1) rotate(-15deg);
+                filter: drop-shadow(0 0 10px rgba(26, 58, 138, 0.3));
+            }
+            50% {
+                transform: scale(1.1) rotate(10deg);
+                filter: drop-shadow(0 0 25px rgba(94, 133, 230, 0.6));
+            }
+        }
+
+        .animate-pulse-gavel {
+            animation: pulseGavel 2s ease-in-out infinite;
+        }
+
+        /* Hover Elevation Styles */
+        .interactive-card {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .interactive-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 22px 45px -12px rgba(26, 58, 138, 0.12);
+            border-color: rgba(26, 58, 138, 0.15);
+        }
+
+        /* Button Hover Scales */
+        .btn-hover {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .btn-hover:hover {
+            transform: translateY(-2px) scale(1.03);
+            filter: brightness(1.1);
+        }
+
+        /* Nav-link Border Transition */
+        .nav-btn {
+            position: relative;
+        }
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: #1A3A8A;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        .nav-btn:hover::after, .nav-btn.nav-active::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .nav-active {
+            color: #1A3A8A !important;
+            font-weight: 600;
+        }
+
+        /* Custom Scrollbar for Premium Feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F8F9FA;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-grayLight text-slate-800 font-sans min-h-screen flex flex-col antialiased">
+
+    <!-- PRELOADER -->
+    <div id="preloader" class="fixed inset-0 bg-slate-950 z-[9999] flex flex-col items-center justify-center transition-all duration-700 ease-in-out">
+        <div class="relative flex flex-col items-center">
+            <!-- Pulsing Premium Gavel Icon Wrapper -->
+            <div class="w-24 h-24 bg-gradient-to-br from-navy-500 to-blue-600 rounded-3xl flex items-center justify-center text-white text-4xl mb-6 shadow-2xl animate-pulse-gavel">
+                <i class="fa-solid fa-gavel"></i>
+            </div>
+            <!-- Text branding with tracking-wider -->
+            <h2 class="text-2xl font-bold text-white tracking-widest mb-2">HES ACADEMY</h2>
+            <p class="text-blue-400 text-sm font-medium tracking-wide animate-pulse">Menghubungkan Anda Dengan Pemahaman Hukum...</p>
+            
+            <!-- Sleek Horizontal Progress Loader -->
+            <div class="w-48 bg-slate-800 h-1 rounded-full overflow-hidden mt-6">
+                <div class="bg-blue-500 h-full w-1/3 rounded-full animate-[loading-bar_1.5s_infinite_ease-in-out]" style="animation-name: slide-progress;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        @keyframes slide-progress {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(200%); }
+        }
+    </style>
+
+    <!-- HEADER NAVBAR -->
+    <header id="main-header" class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-grayBorder transition-all duration-500 ease-in-out py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between transition-all duration-500" id="navbar-container">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="navigateTo('home')">
+                    <div class="w-10 h-10 bg-navy-500 rounded-xl flex items-center justify-center text-white mr-3 shadow-md transition-transform duration-300 hover:rotate-12">
+                        <i class="fa-solid fa-gavel text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold text-navy-500 tracking-wide">HES</span>
+                        <span class="text-xl font-light text-slate-600">Academy</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex space-x-8">
+                    <button onclick="navigateTo('home')" id="nav-home" class="nav-btn text-slate-600 hover:text-navy-500 px-1 py-2 text-sm font-medium transition-colors duration-200 nav-active">Beranda</button>
+                    <button onclick="navigateTo('profil')" id="nav-profil" class="nav-btn text-slate-600 hover:text-navy-500 px-1 py-2 text-sm font-medium transition-colors duration-200">Profil</button>
+                    <button onclick="navigateTo('materi')" id="nav-materi" class="nav-btn text-slate-600 hover:text-navy-500 px-1 py-2 text-sm font-medium transition-colors duration-200">Materi</button>
+                    <button onclick="navigateTo('artikel')" id="nav-artikel" class="nav-btn text-slate-600 hover:text-navy-500 px-1 py-2 text-sm font-medium transition-colors duration-200">Artikel</button>
+                    <button onclick="navigateTo('quiz')" id="nav-quiz" class="nav-btn text-slate-600 hover:text-navy-500 px-1 py-2 text-sm font-medium transition-colors duration-200">Quiz</button>
+                    <button onclick="navigateTo('kontak')" id="nav-kontak" class="nav-btn text-slate-600 hover:text-navy-500 px-1 py-2 text-sm font-medium transition-colors duration-200">Kontak</button>
+                </nav>
+
+                <!-- CTA Button on Header -->
+                <div class="hidden md:block">
+                    <button onclick="navigateTo('materi')" class="btn-hover bg-navy-500 hover:bg-navy-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-md transition-all">
+                        Mulai Belajar <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-lg text-slate-600 hover:text-navy-500 hover:bg-slate-100 focus:outline-none transition-colors duration-200">
+                        <i id="mobile-menu-icon" class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-grayBorder px-4 pt-2 pb-6 space-y-2 transition-all duration-300">
+            <button onclick="navigateTo('home'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-navy-50 hover:text-navy-500">Beranda</button>
+            <button onclick="navigateTo('profil'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-navy-50 hover:text-navy-500">Profil</button>
+            <button onclick="navigateTo('materi'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-navy-50 hover:text-navy-500">Materi</button>
+            <button onclick="navigateTo('artikel'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-navy-50 hover:text-navy-500">Artikel</button>
+            <button onclick="navigateTo('quiz'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-navy-50 hover:text-navy-500">Quiz</button>
+            <button onclick="navigateTo('kontak'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-navy-50 hover:text-navy-500">Kontak</button>
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="navigateTo('materi'); toggleMobileMenu()" class="w-full bg-navy-500 text-white py-3 px-4 rounded-xl font-semibold shadow-md text-center block">
+                    Mulai Belajar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+
+        <!-- ========================================== -->
+        <!-- HOME PAGE -->
+        <!-- ========================================== -->
+        <div id="page-home" class="page-content">
+            
+            <!-- Hero Section -->
+            <section class="relative bg-gradient-to-br from-navy-900 via-navy-800 to-slate-900 text-white overflow-hidden py-24 lg:py-32">
+                <div class="absolute inset-0 opacity-10">
+                    <div class="absolute top-10 left-10 w-72 h-72 rounded-full bg-blue-500 filter blur-3xl"></div>
+                    <div class="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-navy-500 filter blur-3xl"></div>
+                </div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="scroll-reveal">
+                        <div class="inline-flex items-center space-x-2 bg-navy-500/35 text-blue-300 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-6">
+                            <i class="fa-solid fa-graduation-cap text-xs"></i> <span>Platform Edukasi Hukum Terpercaya</span>
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                            Pahami Hukum Lebih <span class="text-blue-400">Mudah & Inklusif</span>
+                        </h1>
+                        <p class="text-lg text-slate-300 mb-8 max-w-xl">
+                            HES Academy menyajikan materi, silabus terstruktur, artikel hukum, serta kuis interaktif yang dirancang untuk akademisi, praktisi, dan masyarakat luas.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="navigateTo('materi')" class="btn-hover bg-navy-500 hover:bg-navy-600 text-white font-semibold py-4 px-8 rounded-xl shadow-lg shadow-navy-900/40 text-center">
+                                Mulai Belajar Sekarang
+                            </button>
+                            <button onclick="navigateTo('quiz')" class="btn-hover bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold py-4 px-8 rounded-xl text-center backdrop-blur-sm">
+                                Ikuti Kuis Interaktif
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating SVG Illustration Side -->
+                    <div class="flex justify-center scroll-reveal delay-200">
+                        <div class="relative w-full max-w-md animate-float-hero">
+                            <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-500 to-navy-500 opacity-30 blur-lg"></div>
+                            
+                            <!-- Custom Embedded Elegant Law & Education Illustration -->
+                            <svg class="w-full h-auto drop-shadow-2xl" viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="500" height="400" rx="24" fill="#0d1c43" fill-opacity="0.8"/>
+                                <!-- Grid Lines -->
+                                <line x1="50" y1="0" x2="50" y2="400" stroke="#1e293b" stroke-opacity="0.4"/>
+                                <line x1="150" y1="0" x2="150" y2="400" stroke="#1e293b" stroke-opacity="0.4"/>
+                                <line x1="250" y1="0" x2="250" y2="400" stroke="#1e293b" stroke-opacity="0.4"/>
+                                <line x1="350" y1="0" x2="350" y2="400" stroke="#1e293b" stroke-opacity="0.4"/>
+                                <line x1="450" y1="0" x2="450" y2="400" stroke="#1e293b" stroke-opacity="0.4"/>
+                                <line x1="0" y1="100" x2="500" y2="100" stroke="#1e293b" stroke-opacity="0.4"/>
+                                <line x1="0" y1="200" x2="500" y2="200" stroke="#1e293b" stroke-opacity="0.4"/>
+                                <line x1="0" y1="300" x2="500" y2="300" stroke="#1e293b" stroke-opacity="0.4"/>
+                                
+                                <!-- Background Abstract Glowing Circles -->
+                                <circle cx="250" cy="200" r="100" fill="#1A3A8A" fill-opacity="0.25" filter="blur(20px)"/>
+                                <circle cx="320" cy="150" r="60" fill="#3b82f6" fill-opacity="0.15" filter="blur(15px)"/>
+                                
+                                <!-- Stylized Law Scale (Left) -->
+                                <g transform="translate(110, 140)">
+                                    <line x1="50" y1="120" x2="50" y2="30" stroke="#5e85e6" stroke-width="6" stroke-linecap="round"/>
+                                    <line x1="20" y1="30" x2="80" y2="30" stroke="#90aeef" stroke-width="6" stroke-linecap="round"/>
+                                    <!-- Left scale plate -->
+                                    <line x1="20" y1="30" x2="10" y2="70" stroke="#5e85e6" stroke-width="2"/>
+                                    <line x1="20" y1="30" x2="30" y2="70" stroke="#5e85e6" stroke-width="2"/>
+                                    <path d="M 5 70 Q 20 80 35 70 Z" fill="#90aeef"/>
+                                    <!-- Right scale plate -->
+                                    <line x1="80" y1="30" x2="70" y2="70" stroke="#5e85e6" stroke-width="2"/>
+                                    <line x1="80" y1="30" x2="90" y2="70" stroke="#5e85e6" stroke-width="2"/>
+                                    <path d="M 65 70 Q 80 80 95 70 Z" fill="#90aeef"/>
+                                    <!-- Base -->
+                                    <path d="M 30 120 L 70 120" stroke="#90aeef" stroke-width="8" stroke-linecap="round"/>
+                                </g>
+
+                                <!-- Stylized Law Book (Right) -->
+                                <g transform="translate(260, 160)">
+                                    <!-- Pages bottom shadow -->
+                                    <rect x="15" y="15" width="110" height="85" rx="8" fill="#1e293b"/>
+                                    <!-- Book cover back -->
+                                    <rect x="10" y="5" width="110" height="85" rx="8" fill="#152e6e"/>
+                                    <!-- White Pages stack -->
+                                    <rect x="18" y="0" width="102" height="84" rx="4" fill="#f8fafc"/>
+                                    <!-- Front cover opening flap -->
+                                    <rect x="5" y="0" width="15" height="90" rx="3" fill="#1A3A8A"/>
+                                    <rect x="20" y="0" width="4" height="84" fill="#e2e8f0"/>
+                                    <!-- Gavel Gold Seal decoration on book -->
+                                    <circle cx="70" cy="40" r="16" fill="#eab308" fill-opacity="0.2"/>
+                                    <circle cx="70" cy="40" r="10" fill="#eab308"/>
+                                    <path d="M 66 38 L 74 38 M 66 42 L 74 42" stroke="#ffffff" stroke-width="2"/>
+                                </g>
+
+                                <!-- Stylized Gavel (Center Floating Overlap) -->
+                                <g transform="translate(210, 120) rotate(-15)">
+                                    <!-- Gavel Handle -->
+                                    <rect x="35" y="55" width="12" height="110" rx="6" fill="#94a3b8" transform="rotate(-30 35 55)"/>
+                                    <rect x="35" y="55" width="12" height="110" rx="6" fill="#cbd5e1" transform="rotate(-30 35 55)" fill-opacity="0.4"/>
+                                    <!-- Gavel Head (Dual Cylinder) -->
+                                    <rect x="10" y="20" width="60" height="35" rx="6" fill="#3b82f6"/>
+                                    <!-- Gold bands -->
+                                    <rect x="22" y="20" width="6" height="35" fill="#eab308"/>
+                                    <rect x="52" y="20" width="6" height="35" fill="#eab308"/>
+                                    <rect x="10" y="15" width="60" height="5" rx="2" fill="#90aeef"/>
+                                    <rect x="10" y="55" width="60" height="5" rx="2" fill="#90aeef"/>
+                                </g>
+                                
+                                <!-- Floating Micro-Icons (Graduation cap, sparkles) -->
+                                <g transform="translate(60, 60)" fill="#3b82f6" fill-opacity="0.6">
+                                    <path d="M0,15 L20,5 L40,15 L20,25 Z"/>
+                                    <path d="M10,18.5 L10,30 C10,35 30,35 30,30 L30,18.5" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                                </g>
+                                <circle cx="410" cy="90" r="4" fill="#38bdf8"/>
+                                <circle cx="380" cy="280" r="6" fill="#38bdf8"/>
+                                <circle cx="100" cy="310" r="5" fill="#eab308"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Penjelasan Singkat HES Academy -->
+            <section class="py-24 bg-white">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center scroll-reveal">
+                    <h2 class="text-3xl font-bold text-navy-500 mb-6">Tentang HES Academy</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        HES Academy merupakan perwujudan visi kami untuk menghadirkan keadilan dan pemahaman hukum yang merata. Kami percaya bahwa setiap individu memiliki hak dasar untuk mengerti hukum yang mengaturnya. Melalui pendekatan digital yang modern, kami menyederhanakan rumitnya terminologi hukum menjadi konten yang ramah dan mudah dipelajari oleh siapa saja, di mana saja, dan kapan saja.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Keunggulan Platform -->
+            <section class="py-24 bg-grayLight border-y border-slate-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16 scroll-reveal">
+                        <h2 class="text-3xl font-bold text-navy-500 mb-4">Mengapa Belajar Bersama Kami?</h2>
+                        <p class="text-slate-500 max-w-2xl mx-auto">Kami mengedepankan kualitas konten serta kenyamanan pengguna melalui ekosistem digital yang komprehensif.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="interactive-card scroll-reveal bg-white p-8 rounded-2xl border border-grayBorder shadow-premium">
+                            <div class="w-12 h-12 bg-navy-50 rounded-xl flex items-center justify-center text-navy-500 text-xl mb-6">
+                                <i class="fa-solid fa-folder-open"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-slate-800">Materi Terstruktur</h3>
+                            <p class="text-slate-500 leading-relaxed text-sm">Disusun secara berjenjang mulai dari pemahaman dasar hukum hingga studi kasus spesifik dan mendalam.</p>
+                        </div>
+                        <div class="interactive-card scroll-reveal delay-100 bg-white p-8 rounded-2xl border border-grayBorder shadow-premium">
+                            <div class="w-12 h-12 bg-navy-50 rounded-xl flex items-center justify-center text-navy-500 text-xl mb-6">
+                                <i class="fa-solid fa-gamepad"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-slate-800">Kuis Interaktif</h3>
+                            <p class="text-slate-500 leading-relaxed text-sm">Uji pemahaman teoritis instan dengan feedback pembahasan langsung demi meningkatkan pemahaman Anda.</p>
+                        </div>
+                        <div class="interactive-card scroll-reveal delay-200 bg-white p-8 rounded-2xl border border-grayBorder shadow-premium">
+                            <div class="w-12 h-12 bg-navy-50 rounded-xl flex items-center justify-center text-navy-500 text-xl mb-6">
+                                <i class="fa-solid fa-user-tie"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-slate-800">Pengajar Ahli</h3>
+                            <p class="text-slate-500 leading-relaxed text-sm">Didukung oleh akademisi dan praktisi berpengalaman untuk validasi materi hukum berkualitas.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Materi Unggulan (Preview) -->
+            <section class="py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row justify-between items-center mb-12 scroll-reveal">
+                        <div>
+                            <h2 class="text-3xl font-bold text-navy-500 mb-2">Materi Hukum Populer</h2>
+                            <p class="text-slate-500">Mulai dari fondasi dasar hingga implementasi hukum praktis.</p>
+                        </div>
+                        <button onclick="navigateTo('materi')" class="btn-hover mt-4 md:mt-0 text-navy-500 font-semibold inline-flex items-center gap-2">
+                            Lihat Semua Materi <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="featured-materi-container">
+                        <!-- Dynamic Featured Material Cards injected by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Artikel Terbaru -->
+            <section class="py-24 bg-grayLight border-t border-slate-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row justify-between items-center mb-12 scroll-reveal">
+                        <div>
+                            <h2 class="text-3xl font-bold text-navy-500 mb-2">Kabar & Opini Hukum Terbaru</h2>
+                            <p class="text-slate-500">Dapatkan wawasan hukum mendalam melalui tulisan-tulisan terkini.</p>
+                        </div>
+                        <button onclick="navigateTo('artikel')" class="btn-hover mt-4 md:mt-0 text-navy-500 font-semibold inline-flex items-center gap-2">
+                            Kunjungi Blog <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="featured-articles-container">
+                        <!-- Dynamic Featured Article Cards injected by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tim Pengembang (Development Team Section) -->
+            <section class="py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16 scroll-reveal">
+                        <span class="text-xs font-bold uppercase tracking-widest text-navy-500 bg-navy-50 px-4 py-1.5 rounded-full">Development Team</span>
+                        <h2 class="text-3xl font-bold text-navy-700 mt-4 mb-4">Tim Pengembang HES Academy</h2>
+                        <p class="text-slate-500 max-w-2xl mx-auto">Kenali para inovator muda yang berada di balik layar pengembangan kurikulum, teknologi, dan platform digital edukasi hukum kami.</p>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                        <div class="interactive-card scroll-reveal bg-grayLight p-5 rounded-2xl border border-grayBorder text-center">
+                            <div class="w-20 h-20 bg-navy-100 rounded-full mx-auto mb-4 flex items-center justify-center text-navy-500 font-bold text-xl shadow-inner transition-transform duration-300 hover:rotate-6">NA</div>
+                            <h3 class="font-bold text-slate-800 text-sm mb-1 leading-snug">Nayla Azizah</h3>
+                            <p class="text-xs text-navy-500 font-medium">Project Manager</p>
+                        </div>
+                        <div class="interactive-card scroll-reveal delay-100 bg-grayLight p-5 rounded-2xl border border-grayBorder text-center">
+                            <div class="w-20 h-20 bg-navy-100 rounded-full mx-auto mb-4 flex items-center justify-center text-navy-500 font-bold text-xl shadow-inner transition-transform duration-300 hover:rotate-6">RK</div>
+                            <h3 class="font-bold text-slate-800 text-sm mb-1 leading-snug">Reysheeka Kaila</h3>
+                            <p class="text-xs text-navy-500 font-medium">UI/UX Lead</p>
+                        </div>
+                        <div class="interactive-card scroll-reveal delay-200 bg-grayLight p-5 rounded-2xl border border-grayBorder text-center">
+                            <div class="w-20 h-20 bg-navy-100 rounded-full mx-auto mb-4 flex items-center justify-center text-navy-500 font-bold text-xl shadow-inner transition-transform duration-300 hover:rotate-6">ZB</div>
+                            <h3 class="font-bold text-slate-800 text-sm mb-1 leading-snug">Zahra Amelia</h3>
+                            <p class="text-xs text-navy-500 font-medium">Legal Researcher</p>
+                        </div>
+                        <div class="interactive-card scroll-reveal delay-300 bg-grayLight p-5 rounded-2xl border border-grayBorder text-center">
+                            <div class="w-20 h-20 bg-navy-100 rounded-full mx-auto mb-4 flex items-center justify-center text-navy-500 font-bold text-xl shadow-inner transition-transform duration-300 hover:rotate-6">FF</div>
+                            <h3 class="font-bold text-slate-800 text-sm mb-1 leading-snug">Fikri Firdaos</h3>
+                            <p class="text-xs text-navy-500 font-medium">Front-End Dev</p>
+                        </div>
+                        <div class="interactive-card scroll-reveal delay-400 bg-grayLight p-5 rounded-2xl border border-grayBorder text-center">
+                            <div class="w-20 h-20 bg-navy-100 rounded-full mx-auto mb-4 flex items-center justify-center text-navy-500 font-bold text-xl shadow-inner transition-transform duration-300 hover:rotate-6">AM</div>
+                            <h3 class="font-bold text-slate-800 text-sm mb-1 leading-snug">Afwan Moehtaram</h3>
+                            <p class="text-xs text-navy-500 font-medium">Back-End Dev</p>
+                        </div>
+                        <div class="interactive-card scroll-reveal delay-500 bg-grayLight p-5 rounded-2xl border border-grayBorder text-center">
+                            <div class="w-20 h-20 bg-navy-100 rounded-full mx-auto mb-4 flex items-center justify-center text-navy-500 font-bold text-xl shadow-inner transition-transform duration-300 hover:rotate-6">MR</div>
+                            <h3 class="font-bold text-slate-800 text-sm mb-1 leading-snug">Muhamad Fikry</h3>
+                            <p class="text-xs text-navy-500 font-medium">QA Specialist</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action (CTA) Section -->
+            <section class="py-20 bg-navy-500 text-white relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-navy-600 to-blue-900 opacity-90"></div>
+                <div class="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-blue-400/10 filter blur-xl"></div>
+                <div class="absolute -bottom-12 -right-12 w-72 h-72 rounded-full bg-blue-300/10 filter blur-xl"></div>
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10 scroll-reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Siap Menguji Pemahaman Hukum Anda?</h2>
+                    <p class="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">Ikuti kuis interaktif yang seru untuk menguji materi yang telah Anda pelajari hari ini, lengkap dengan leaderboard yang kompetitif.</p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button onclick="navigateTo('quiz')" class="btn-hover bg-white text-navy-500 font-semibold py-3.5 px-8 rounded-xl shadow-md">
+                            Mulai Kuis Sekarang
+                        </button>
+                        <button onclick="navigateTo('materi')" class="btn-hover bg-navy-600 hover:bg-navy-700 text-white font-semibold py-3.5 px-8 rounded-xl border border-navy-400">
+                            Pelajari Materi Dahulu
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- PROFIL PAGE -->
+        <!-- ========================================== -->
+        <div id="page-profil" class="page-content hidden">
+            <!-- Profil Banner -->
+            <section class="bg-gradient-to-br from-navy-900 to-navy-800 py-24 text-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center scroll-reveal">
+                    <h1 class="text-4xl font-bold mb-4">Profil Lembaga</h1>
+                    <p class="text-slate-300 max-w-2xl mx-auto">Dedikasi kami dalam menghadirkan keterbukaan akses edukasi hukum di Indonesia.</p>
+                </div>
+            </section>
+
+            <!-- Visi & Misi -->
+            <section class="py-24 bg-white">
+                <div class="max-w-5xl mx-auto px-4 sm:px-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <div class="bg-grayLight p-8 rounded-2xl border border-grayBorder shadow-premium scroll-reveal">
+                            <div class="w-12 h-12 bg-navy-500 text-white rounded-xl flex items-center justify-center text-2xl mb-6 shadow-md">
+                                <i class="fa-solid fa-eye"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-navy-500 mb-4">Visi Kami</h2>
+                            <p class="text-slate-600 leading-relaxed">
+                                Menjadi platform pionir edukasi hukum terdepan di Indonesia yang terpercaya, modern, dan dapat diakses secara inklusif demi melahirkan generasi yang sadar dan patuh hukum.
+                            </p>
+                        </div>
+                        <div class="bg-grayLight p-8 rounded-2xl border border-grayBorder shadow-premium scroll-reveal delay-200">
+                            <div class="w-12 h-12 bg-navy-500 text-white rounded-xl flex items-center justify-center text-2xl mb-6 shadow-md">
+                                <i class="fa-solid fa-bullseye"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-navy-500 mb-4">Misi Kami</h2>
+                            <ul class="space-y-3 text-slate-600">
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-check text-navy-500 mt-1 mr-3"></i>
+                                    <span>Menyajikan materi hukum yang terstruktur, akurat, dan mudah dimengerti.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-check text-navy-500 mt-1 mr-3"></i>
+                                    <span>Mengembangkan kuis interaktif sebagai instrumen evaluasi yang menyenangkan.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-check text-navy-500 mt-1 mr-3"></i>
+                                    <span>Menyebarluaskan opini dan artikel hukum terpercaya untuk meningkatkan kesadaran publik.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Struktur Organisasi / Core Values -->
+            <section class="py-20 bg-grayLight">
+                <div class="max-w-5xl mx-auto px-4 sm:px-6">
+                    <h2 class="text-3xl font-bold text-navy-500 text-center mb-12 scroll-reveal">Nilai-Nilai Utama</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                        <div class="p-6 bg-white rounded-xl border border-grayBorder shadow-premium scroll-reveal">
+                            <h3 class="font-bold text-lg text-navy-500 mb-2">Integritas</h3>
+                            <p class="text-slate-500 text-sm">Menyajikan materi berbasis fakta, referensi akademis, dan peraturan perundang-undangan resmi.</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-xl border border-grayBorder shadow-premium scroll-reveal delay-100">
+                            <h3 class="font-bold text-lg text-navy-500 mb-2">Aksesibilitas</h3>
+                            <p class="text-slate-500 text-sm">Menghilangkan batasan finansial maupun geografis demi penyebaran literasi hukum merata.</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-xl border border-grayBorder shadow-premium scroll-reveal delay-200">
+                            <h3 class="font-bold text-lg text-navy-500 mb-2">Inovasi</h3>
+                            <p class="text-slate-500 text-sm">Memanfaatkan teknologi digital untuk menciptakan pengalaman belajar yang menyenangkan.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- MATERI PAGE -->
+        <!-- ========================================== -->
+        <div id="page-materi" class="page-content hidden">
+            <section class="bg-white py-12 border-b border-grayBorder">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-reveal">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                        <div>
+                            <h1 class="text-3xl font-bold text-navy-500 mb-2">Modul & Silabus Hukum</h1>
+                            <p class="text-slate-500">Pilih dan pelajari materi hukum dari berbagai kategori yang tersedia secara mendalam.</p>
+                        </div>
+                        
+                        <!-- Search & Filter Controls -->
+                        <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                            <!-- Search Bar -->
+                            <div class="relative flex-grow sm:w-64">
+                                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3.5 text-slate-400"></i>
+                                <input type="text" id="materi-search-input" onkeyup="filterMateri()" placeholder="Cari materi hukum..." class="pl-10 pr-4 py-2.5 w-full bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all text-sm">
+                            </div>
+                            
+                            <!-- Categories Filter -->
+                            <div class="sm:w-48">
+                                <select id="materi-category-select" onchange="filterMateri()" class="py-2.5 px-4 w-full bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all text-sm">
+                                    <option value="All">Semua Kategori</option>
+                                    <option value="Hukum Perdata">Hukum Perdata</option>
+                                    <option value="Hukum Pidana">Hukum Pidana</option>
+                                    <option value="Hukum Dagang">Hukum Dagang</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Materi Grid -->
+            <section class="py-12 bg-grayLight">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 scroll-reveal" id="materi-grid-container">
+                        <!-- Dynamic Materis will be injected here by Javascript -->
+                    </div>
+                    <!-- Empty State for Search -->
+                    <div id="materi-empty-state" class="hidden text-center py-20 bg-white rounded-2xl border border-dashed border-slate-200">
+                        <i class="fa-regular fa-folder-open text-slate-300 text-5xl mb-4 animate-bounce"></i>
+                        <h3 class="font-bold text-lg text-slate-600 mb-1">Materi Tidak Ditemukan</h3>
+                        <p class="text-slate-400 text-sm">Coba gunakan kata kunci pencarian atau kategori yang berbeda.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- MATERI DETAIL PAGE (SPA SUBPAGE) -->
+        <!-- ========================================== -->
+        <div id="page-materi-detail" class="page-content hidden">
+            <!-- Breadcrumbs Header -->
+            <section class="bg-white border-b border-grayBorder py-6">
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 scroll-reveal">
+                    <nav class="flex items-center space-x-2 text-xs sm:text-sm text-slate-400 mb-4">
+                        <button onclick="navigateTo('home')" class="hover:text-navy-500">Beranda</button>
+                        <span>/</span>
+                        <button onclick="navigateTo('materi')" class="hover:text-navy-500">Materi</button>
+                        <span>/</span>
+                        <span class="text-slate-600 font-medium truncate" id="materi-detail-breadcrumb">Detail Materi</span>
+                    </nav>
+                    
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <button onclick="goBackToMateriList()" class="btn-hover inline-flex items-center text-navy-500 hover:text-navy-700 font-semibold text-sm self-start">
+                            <i class="fa-solid fa-arrow-left-long mr-2"></i> Kembali ke Daftar Materi
+                        </button>
+                        
+                        <span id="materi-detail-category" class="bg-navy-100 text-navy-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider self-start sm:self-auto">
+                            Kategori Hukum
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Content Reader -->
+            <section class="py-12 bg-grayLight">
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        
+                        <!-- Rich Text Content Column (Left - 70%) -->
+                        <div class="lg:col-span-2 bg-white rounded-2xl border border-grayBorder p-6 sm:p-10 shadow-premium scroll-reveal">
+                            <h1 id="materi-detail-title" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-navy-700 leading-snug mb-6 border-b border-slate-100 pb-4">
+                                Judul Modul Materi Hukum
+                            </h1>
+                            
+                            <!-- Custom HTML Body populated dynamically -->
+                            <div id="materi-detail-body" class="prose max-w-none text-slate-600 space-y-6 text-sm sm:text-base leading-relaxed">
+                                <!-- Content dynamically populated by openMateriDetail() -->
+                            </div>
+
+                            <!-- Navigation Footer -->
+                            <div class="mt-12 pt-8 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                                <button onclick="goBackToMateriList()" class="btn-hover w-full sm:w-auto bg-slate-100 text-slate-700 hover:bg-slate-200 font-semibold py-3 px-6 rounded-xl text-center">
+                                    <i class="fa-solid fa-folder-open mr-2"></i> Lihat Modul Lainnya
+                                </button>
+                                <button onclick="navigateTo('quiz')" class="btn-hover w-full sm:w-auto bg-navy-500 hover:bg-navy-600 text-white font-semibold py-3 px-6 rounded-xl text-center shadow-md">
+                                    Mulai Uji Pemahaman Kuis <i class="fa-solid fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Sidebar Metadata & Recommendations (Right - 30%) -->
+                        <div class="space-y-6 scroll-reveal delay-200">
+                            <!-- Estimasi Waktu & Progress Card -->
+                            <div class="bg-white p-6 rounded-2xl border border-grayBorder shadow-premium">
+                                <h3 class="font-bold text-slate-800 text-base mb-4 border-b border-slate-100 pb-2">Informasi Silabus</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-center text-slate-600 text-sm">
+                                        <i class="fa-regular fa-clock w-6 text-navy-500 text-lg"></i>
+                                        <span id="materi-detail-duration">6 Sesi Belajar</span>
+                                    </div>
+                                    <div class="flex items-center text-slate-600 text-sm">
+                                        <i class="fa-solid fa-shield-halved w-6 text-navy-500"></i>
+                                        <span>Sertifikasi Kompetensi Tersedia</span>
+                                    </div>
+                                    <div class="flex items-center text-slate-600 text-sm">
+                                        <i class="fa-regular fa-id-card w-6 text-navy-500"></i>
+                                        <span>Tingkat Kesulitan: Terbuka untuk Umum</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Educational Recommendation Widget -->
+                            <div class="bg-navy-900 text-white p-6 rounded-2xl relative overflow-hidden shadow-premium">
+                                <div class="absolute inset-0 opacity-10">
+                                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-500 rounded-full filter blur-xl"></div>
+                                </div>
+                                <div class="relative z-10">
+                                    <h4 class="font-bold text-lg mb-2">Ingin Diskusi Lebih Lanjut?</h4>
+                                    <p class="text-xs text-slate-300 leading-relaxed mb-4">Tim legal kami siap membantu menjawab pertanyaan akademis Anda melalui unit kontak lembaga kami.</p>
+                                    <button onclick="navigateTo('kontak')" class="btn-hover bg-white text-navy-500 font-semibold py-2 px-4 rounded-xl text-xs w-full text-center">
+                                        Hubungi Tim Pendukung
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- ARTIKEL PAGE -->
+        <!-- ========================================== -->
+        <div id="page-artikel" class="page-content hidden">
+            <section class="bg-white py-12 border-b border-grayBorder">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-reveal">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                        <div>
+                            <h1 class="text-3xl font-bold text-navy-500 mb-2">Kabar Hukum & Opini</h1>
+                            <p class="text-slate-500">Kumpulan analisis hukum terkini, studi kasus, serta opini ahli secara komprehensif.</p>
+                        </div>
+                        <!-- Search Articles -->
+                        <div class="relative w-full lg:w-72">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3.5 text-slate-400"></i>
+                            <input type="text" id="artikel-search-input" onkeyup="filterArticles()" placeholder="Cari artikel..." class="pl-10 pr-4 py-2.5 w-full bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all text-sm">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Articles Grid -->
+            <section class="py-12 bg-grayLight">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 scroll-reveal" id="articles-grid-container">
+                        <!-- Dynamic Articles will be injected here by Javascript -->
+                    </div>
+                    <!-- Empty State -->
+                    <div id="artikel-empty-state" class="hidden text-center py-20 bg-white rounded-2xl border border-dashed border-slate-200">
+                        <i class="fa-regular fa-newspaper text-slate-300 text-5xl mb-4 animate-bounce"></i>
+                        <h3 class="font-bold text-lg text-slate-600 mb-1">Artikel Tidak Ditemukan</h3>
+                        <p class="text-slate-400 text-sm">Coba cari kata kunci lainnya.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- QUIZ PAGE -->
+        <!-- ========================================== -->
+        <div id="page-quiz" class="page-content hidden">
+            <!-- Quiz Landing Header -->
+            <section class="bg-gradient-to-br from-navy-900 to-navy-800 py-16 text-white text-center">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-reveal">
+                    <h1 class="text-4xl font-bold mb-4">Evaluasi Pemahaman Hukum</h1>
+                    <p class="text-slate-300 max-w-2xl mx-auto">Asah pengetahuan Anda tentang dasar-dasar hukum melalui sistem kuis interaktif yang seru dan dapatkan umpan balik secara instan.</p>
+                </div>
+            </section>
+
+            <!-- Active Quiz Component Area -->
+            <section class="py-12 bg-grayLight">
+                <div class="max-w-3xl mx-auto px-4 sm:px-6">
+                    <!-- Quiz Selector Dashboard -->
+                    <div id="quiz-list-view" class="space-y-6">
+                        <h2 class="text-2xl font-bold text-navy-500 mb-4 scroll-reveal">Pilih Topik Kuis</h2>
+                        <div class="grid grid-cols-1 gap-4">
+                            <!-- Quiz 1 -->
+                            <div class="bg-white p-6 rounded-2xl border border-grayBorder shadow-premium flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 scroll-reveal">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 bg-indigo-50 text-indigo-500 rounded-xl flex items-center justify-center text-xl flex-shrink-0">
+                                        <i class="fa-solid fa-gavel"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-lg">Kuis Pengantar Hukum</h3>
+                                        <p class="text-slate-500 text-sm">Menguji pemahaman asas-asas hukum dan sejarah pengenalan hukum umum.</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-xs text-slate-400">
+                                            <span><i class="fa-solid fa-list-check mr-1.5"></i> 5 Soal</span>
+                                            <span><i class="fa-solid fa-clock mr-1.5"></i> 5 Menit</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button onclick="startQuiz(0)" class="btn-hover w-full sm:w-auto bg-navy-500 text-white font-semibold py-2.5 px-6 rounded-xl text-center shadow-md">
+                                    Mulai Kuis
+                                </button>
+                            </div>
+
+                            <!-- Quiz 2 -->
+                            <div class="bg-white p-6 rounded-2xl border border-grayBorder shadow-premium flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 scroll-reveal">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 bg-amber-50 text-amber-500 rounded-xl flex items-center justify-center text-xl flex-shrink-0">
+                                        <i class="fa-solid fa-scale-balanced"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-lg">Kuis Hukum Perdata</h3>
+                                        <p class="text-slate-500 text-sm">Menguji pengetahuan mengenai subjek hukum, perikatan, perjanjian, dan pembuktian perdata.</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-xs text-slate-400">
+                                            <span><i class="fa-solid fa-list-check mr-1.5"></i> 5 Soal</span>
+                                            <span><i class="fa-solid fa-clock mr-1.5"></i> 5 Menit</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button onclick="startQuiz(1)" class="btn-hover w-full sm:w-auto bg-navy-500 text-white font-semibold py-2.5 px-6 rounded-xl text-center shadow-md">
+                                    Mulai Kuis
+                                </button>
+                            </div>
+
+                            <!-- Quiz 3 -->
+                            <div class="bg-white p-6 rounded-2xl border border-grayBorder shadow-premium flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 scroll-reveal">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 bg-rose-50 text-rose-500 rounded-xl flex items-center justify-center text-xl flex-shrink-0">
+                                        <i class="fa-solid fa-shield-halved"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-lg">Kuis Hukum Pidana</h3>
+                                        <p class="text-slate-500 text-sm">Menguji pemahaman tentang tindak pidana, delik, sanksi, dan asas legalitas pidana.</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-xs text-slate-400">
+                                            <span><i class="fa-solid fa-list-check mr-1.5"></i> 5 Soal</span>
+                                            <span><i class="fa-solid fa-clock mr-1.5"></i> 5 Menit</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button onclick="startQuiz(2)" class="btn-hover w-full sm:w-auto bg-navy-500 text-white font-semibold py-2.5 px-6 rounded-xl text-center shadow-md">
+                                    Mulai Kuis
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Quiz Play Area (Hidden by Default) -->
+                    <div id="quiz-play-view" class="hidden bg-white rounded-2xl border border-grayBorder p-6 md:p-8 shadow-premium scroll-reveal">
+                        <!-- Progress & Question Tracker -->
+                        <div class="flex justify-between items-center mb-6">
+                            <span id="quiz-title-text" class="text-navy-500 font-bold text-sm">Kuis Pengantar Hukum</span>
+                            <span id="question-tracker" class="bg-navy-50 text-navy-500 text-xs font-semibold px-3 py-1 rounded-full">Soal 1 dari 5</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-2 mb-8">
+                            <div id="quiz-progress-bar" class="bg-navy-500 h-2 rounded-full transition-all duration-500" style="width: 20%"></div>
+                        </div>
+
+                        <!-- Question Statement -->
+                        <div class="mb-8">
+                            <h3 id="question-text" class="text-xl font-bold text-slate-800 leading-relaxed">...</h3>
+                        </div>
+
+                        <!-- Multiple Choice Options -->
+                        <div class="space-y-4" id="quiz-options-container">
+                            <!-- Dynamically loaded options buttons -->
+                        </div>
+
+                        <!-- Quiz Action buttons -->
+                        <div class="flex justify-end mt-8">
+                            <button id="quiz-next-btn" onclick="nextQuestion()" disabled class="bg-slate-300 text-slate-500 font-semibold py-3 px-6 rounded-xl cursor-not-allowed">
+                                Lanjut <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Scoreboard / Results Screen (Hidden by Default) -->
+                    <div id="quiz-result-view" class="hidden bg-white rounded-2xl border border-grayBorder p-8 text-center shadow-premium scroll-reveal">
+                        <div class="w-24 h-24 bg-green-50 text-green-500 rounded-full mx-auto mb-6 flex items-center justify-center text-4xl shadow-inner animate-bounce">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-navy-500 mb-2">Evaluasi Selesai!</h2>
+                        <p class="text-slate-500 mb-8">Kuis Anda telah berhasil dievaluasi dengan hasil sebagai berikut:</p>
+                        
+                        <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto mb-8">
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                <span class="block text-slate-400 text-xs font-medium uppercase mb-1">Skor Akhir</span>
+                                <span id="result-score-text" class="text-3xl font-black text-navy-500">100</span>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                <span class="block text-slate-400 text-xs font-medium uppercase mb-1">Jawaban Benar</span>
+                                <span id="result-correct-text" class="text-3xl font-black text-green-500">5/5</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row justify-center gap-4">
+                            <button onclick="resetToQuizDashboard()" class="btn-hover bg-navy-500 text-white font-semibold py-3.5 px-8 rounded-xl shadow-md">
+                                Kembali ke Kuis
+                            </button>
+                            <button onclick="navigateTo('materi')" class="btn-hover bg-slate-100 text-slate-700 font-semibold py-3.5 px-8 rounded-xl hover:bg-slate-200">
+                                Pelajari Materi Lainnya
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- KONTAK PAGE -->
+        <!-- ========================================== -->
+        <div id="page-kontak" class="page-content hidden">
+            <!-- Banner Kontak -->
+            <section class="bg-gradient-to-br from-navy-900 to-navy-800 py-20 text-white text-center">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-reveal">
+                    <h1 class="text-4xl font-bold mb-4">Hubungi Kami</h1>
+                    <p class="text-slate-300 max-w-2xl mx-auto">Kami siap melayani kebutuhan kerja sama akademis, pertanyaan seputar materi, atau masukan sistem.</p>
+                </div>
+            </section>
+
+            <!-- Formulir & Informasi Kontak -->
+            <section class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <!-- Formulir Kontak -->
+                        <div class="bg-grayLight p-8 rounded-2xl border border-grayBorder shadow-premium scroll-reveal">
+                            <h2 class="text-2xl font-bold text-navy-500 mb-6">Kirimkan Pesan</h2>
+                            <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-6">
+                                <div>
+                                    <label class="block text-slate-700 text-sm font-medium mb-2">Nama Lengkap</label>
+                                    <input type="text" required class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-slate-700 text-sm font-medium mb-2">Alamat Email</label>
+                                    <input type="email" required class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-slate-700 text-sm font-medium mb-2">Subjek</label>
+                                    <input type="text" required class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-slate-700 text-sm font-medium mb-2">Pesan Anda</label>
+                                    <textarea rows="4" required class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all text-sm"></textarea>
+                                </div>
+                                <button type="submit" class="btn-hover w-full bg-navy-500 text-white font-semibold py-3 rounded-xl shadow-md transition-all text-center">
+                                    Kirim Pesan
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Informasi Kontak Resmi -->
+                        <div class="flex flex-col justify-between scroll-reveal delay-200">
+                            <div class="space-y-8">
+                                <div>
+                                    <h2 class="text-2xl font-bold text-navy-500 mb-6">Informasi Kontak Resmi</h2>
+                                    <p class="text-slate-600 mb-6 leading-relaxed">
+                                        Anda dapat langsung menghubungi tim pengembang atau mendatangi unit pelayanan administrasi kami pada jam operasional kerja.
+                                    </p>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex items-start">
+                                        <div class="w-10 h-10 bg-navy-50 text-navy-500 rounded-xl flex items-center justify-center mr-4 flex-shrink-0 transition-transform duration-300 hover:scale-110">
+                                            <i class="fa-solid fa-envelope"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-800">Email Resmi</h4>
+                                            <p class="text-slate-500 text-sm">info@hesacademy.edu</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="w-10 h-10 bg-navy-50 text-navy-500 rounded-xl flex items-center justify-center mr-4 flex-shrink-0 transition-transform duration-300 hover:scale-110">
+                                            <i class="fa-solid fa-phone"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-800">Telepon</h4>
+                                            <p class="text-slate-500 text-sm">+62 21-8898-0099</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="w-10 h-10 bg-navy-50 text-navy-500 rounded-xl flex items-center justify-center mr-4 flex-shrink-0 transition-transform duration-300 hover:scale-110">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-800">Kampus Utama</h4>
+                                            <p class="text-slate-500 text-sm">Jl. Pendidikan Hukum No. 12, DKI Jakarta, Indonesia</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Decorative Zoomable Map Placeholder -->
+                            <div class="mt-8 bg-slate-100 rounded-2xl h-48 border border-grayBorder flex items-center justify-center overflow-hidden relative shadow-inner group cursor-pointer">
+                                <div class="absolute inset-0 bg-cover bg-center opacity-30 transition-transform duration-700 group-hover:scale-110" style="background-image: url('https://placehold.co/600x400/1a3a8a/ffffff?text=Peta+Lokasi+HES+Academy')"></div>
+                                <div class="relative text-center p-4">
+                                    <i class="fa-solid fa-map-location-dot text-navy-500 text-3xl mb-2 transition-transform duration-500 group-hover:translate-y-[-4px]"></i>
+                                    <p class="text-xs font-semibold text-slate-600">Integrasi Peta Interaktif</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Custom Dialog Modal (Replaces unsafe window.alert) -->
+    <div id="custom-toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 ease-out pointer-events-none">
+        <div class="bg-slate-900/95 text-white py-3.5 px-6 rounded-xl shadow-2xl flex items-center space-x-3 border border-slate-700">
+            <span id="toast-icon-box" class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-xs">
+                <i id="toast-icon" class="fa-solid fa-check"></i>
+            </span>
+            <p id="toast-message" class="text-sm font-medium">Notifikasi berhasil ditampilkan!</p>
+        </div>
+    </div>
+
+    <!-- Interactive Reader Modal for Article Details -->
+    <div id="reader-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 transition-all duration-300">
+        <div class="bg-white rounded-2xl border border-grayBorder w-full max-w-2xl max-h-[85vh] flex flex-col shadow-2xl transform scale-95 transition-all duration-300">
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-grayBorder flex justify-between items-center bg-slate-50 rounded-t-2xl">
+                <div>
+                    <span id="modal-category" class="bg-navy-50 text-navy-500 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">KATEGORI</span>
+                    <h3 id="modal-title" class="text-xl font-bold text-slate-800 mt-2">Detail Pembacaan</h3>
+                </div>
+                <button onclick="closeReaderModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <!-- Modal Body (Scrollable) -->
+            <div class="p-6 overflow-y-auto space-y-4" id="modal-body-content">
+                <!-- Content injected dynamically -->
+            </div>
+            <!-- Modal Footer -->
+            <div class="p-6 border-t border-grayBorder flex justify-end">
+                <button onclick="closeReaderModal()" class="bg-navy-500 text-white font-semibold py-2.5 px-6 rounded-xl shadow-md">
+                    Selesai Membaca
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-navy-900 text-white border-t border-navy-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <!-- Branding and bio -->
+                <div class="md:col-span-2 scroll-reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 bg-navy-500 rounded-xl flex items-center justify-center text-white mr-3">
+                            <i class="fa-solid fa-gavel"></i>
+                        </div>
+                        <span class="text-xl font-bold tracking-wide">HES Academy</span>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-sm mb-6">
+                        Platform edukasi hukum digital independen yang bertujuan mencerdaskan serta memberikan pemahaman regulasi secara merata kepada seluruh elemen masyarakat Indonesia.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-9 h-9 bg-navy-800 hover:bg-navy-700 rounded-lg flex items-center justify-center text-slate-300 transition-colors"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-9 h-9 bg-navy-800 hover:bg-navy-700 rounded-lg flex items-center justify-center text-slate-300 transition-colors"><i class="fa-brands fa-x-twitter text-sm"></i></a>
+                        <a href="#" class="w-9 h-9 bg-navy-800 hover:bg-navy-700 rounded-lg flex items-center justify-center text-slate-300 transition-colors"><i class="fa-brands fa-instagram text-sm"></i></a>
+                        <a href="#" class="w-9 h-9 bg-navy-800 hover:bg-navy-700 rounded-lg flex items-center justify-center text-slate-300 transition-colors"><i class="fa-brands fa-linkedin-in text-sm"></i></a>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="scroll-reveal delay-100">
+                    <h3 class="font-bold text-sm tracking-widest uppercase text-blue-400 mb-6">Akses Cepat</h3>
+                    <ul class="space-y-3 text-sm text-slate-400 font-medium">
+                        <li><button onclick="navigateTo('home')" class="hover:text-white transition-colors">Beranda</button></li>
+                        <li><button onclick="navigateTo('profil')" class="hover:text-white transition-colors">Profil Lembaga</button></li>
+                        <li><button onclick="navigateTo('materi')" class="hover:text-white transition-colors">Modul Materi</button></li>
+                        <li><button onclick="navigateTo('artikel')" class="hover:text-white transition-colors">Artikel Hukum</button></li>
+                        <li><button onclick="navigateTo('quiz')" class="hover:text-white transition-colors">Kuis Interaktif</button></li>
+                    </ul>
+                </div>
+
+                <!-- Legal Information -->
+                <div class="scroll-reveal delay-200">
+                    <h3 class="font-bold text-sm tracking-widest uppercase text-blue-400 mb-6">Hubungi Kami</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Punya pertanyaan atau ingin bermitra bersama kami?
+                    </p>
+                    <button onclick="navigateTo('kontak')" class="bg-navy-800 hover:bg-navy-700 text-white font-semibold py-2.5 px-5 rounded-xl text-sm border border-navy-700 w-full text-center">
+                        Hubungi Tim Pengembang
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="border-t border-navy-800 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-xs">
+                <p>&copy; 2026 HES Academy. Hak Cipta Dilindungi Undang-Undang.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-slate-300">Ketentuan Layanan</a>
+                    <a href="#" class="hover:text-slate-300">Kebijakan Privasi</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Premium and detailed legal materials dataset (300-500 words per item)
+        const materis = [
+            {
+                id: 1,
+                title: 'Pengantar Ilmu Hukum',
+                category: 'Hukum Perdata',
+                desc: 'Memahami dasar epistemologis hukum, fungsi, tujuan, dan sendi-sendi utama penataan sosial secara yuridis.',
+                longDesc: `
+                    <p class="mb-4">Pengantar Ilmu Hukum (PIH) merupakan mata kuliah dasar dan fondasi utama bagi siapa saja yang ingin mendalami dunia hukum. Sebagai titik awal pembelajaran, modul ini dirancang untuk memperkenalkan pengertian dasar, konsep fundamental, asas-asas, serta struktur institusi hukum yang mengatur kehidupan bermasyarakat.</p>
+                    
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Hakikat dan Definisi Hukum</h3>
+                    <p class="mb-4">Secara umum, hukum dapat diartikan sebagai sekumpulan peraturan tertulis maupun tidak tertulis yang dibuat oleh lembaga yang berwenang, bersifat memaksa, dan memiliki sanksi yang tegas bagi pelanggarnya. Hukum hadir sebagai instrumen rekayasa sosial (<em>law as a tool of social engineering</em>) dan alat untuk menciptakan ketertiban umum (<em>social control</em>).</p>
+                    
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Unsur-Unsur Pokok Hukum</h3>
+                    <p class="mb-2">Untuk disebut sebagai hukum, suatu instrumen regulasi wajib memiliki beberapa unsur penting berikut:</p>
+                    <ul class="list-disc pl-6 mb-4 space-y-1">
+                        <li><strong>Peraturan Tingkah Laku:</strong> Mengatur perbuatan lahiriah manusia dalam hubungannya dengan orang lain.</li>
+                        <li><strong>Dibuat Badan Resmi:</strong> Dirancang oleh lembaga legislatif atau otoritas negara yang sah.</li>
+                        <li><strong>Bersifat Memaksa:</strong> Harus dipatuhi oleh seluruh subjek hukum tanpa pengecualian.</li>
+                        <li><strong>Sanksi Tegas:</strong> Pelanggaran terhadap peraturan akan dikenai sanksi pidana, perdata, atau administratif.</li>
+                    </ul>
+
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Tujuan Utama Hukum</h3>
+                    <p class="mb-4">Berdasarkan teori-teori hukum klasik dan modern, ada tiga nilai dasar atau tujuan utama yang ingin dicapai oleh hukum di dalam masyarakat:</p>
+                    <ol class="list-decimal pl-6 mb-4 space-y-1">
+                        <li><strong>Keadilan (Justice):</strong> Memberikan hak yang proporsional kepada setiap individu berdasarkan porsinya.</li>
+                        <li><strong>Kepastian Hukum (Legal Certainty):</strong> Menjamin bahwa aturan diterapkan secara konsisten, tertulis, dan dapat diprediksi.</li>
+                        <li><strong>Kemanfaatan (Utility):</strong> Menghasilkan kebahagiaan dan dampak positif terbesar bagi mayoritas masyarakat.</li>
+                    </ol>
+
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Contoh Sederhana Sehari-hari</h3>
+                    <div class="bg-blue-50 border-l-4 border-navy-500 p-4 rounded-r-xl my-4">
+                        <p class="text-sm font-medium text-navy-700 mb-1">Studi Kasus: Rambu Lalu Lintas</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Ketika pengendara berhenti saat lampu merah menyala, pengendara tersebut mematuhi aturan demi keselamatan bersama (kemanfaatan) atas dasar undang-undang lalu lintas yang tertulis (kepastian hukum). Jika dilanggar, polisi akan mengenakan sanksi tilang atau denda (memaksa & memiliki sanksi).</p>
+                    </div>
+                `,
+                duration: '6 Sesi Belajar',
+                badge: 'Populer'
+            },
+            {
+                id: 2,
+                title: 'Hukum Perjanjian & Kontrak',
+                category: 'Hukum Perdata',
+                desc: 'Analisis pasal 1320 KUHPerdata tentang syarat sahnya suatu perjanjian serta mekanisme wanprestasi hukum.',
+                longDesc: `
+                    <p class="mb-4">Dalam aktivitas ekonomi modern, perjanjian dan draf kontrak merupakan dasar dari pertukaran hak dan kewajiban. Pemahaman mengenai hukum kontrak sangat penting bagi pelaku bisnis, akademisi, dan individu untuk menghindari sengketa perdata di kemudian hari.</p>
+                    
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Analisis Esensial Pasal 1320 KUHPerdata</h3>
+                    <p class="mb-4">Agar suatu perjanjian sah dan memiliki kekuatan mengikat secara hukum di Indonesia, perjanjian tersebut wajib memenuhi empat syarat utama sebagaimana diatur dalam <strong>Pasal 1320 Kitab Undang-Undang Hukum Perdata (KUHPerdata)</strong>:</p>
+                    
+                    <ul class="list-disc pl-6 mb-4 space-y-2">
+                        <li><strong>Kesepakatan Mereka yang Mengikatkan Dirinya (Syarat Subjektif):</strong> Adanya persetujuan bebas tanpa adanya paksaan (<em>dwang</em>), kekhilafan (<em>dwaling</em>), atau penipuan (<em>bedrog</em>).</li>
+                        <li><strong>Kecakapan untuk Membuat Suatu Perikatan (Syarat Subjektif):</strong> Pihak yang bersepakat harus sudah dewasa (berusia minimal 21 tahun atau sudah menikah) dan tidak di bawah pengampuan (gangguan jiwa atau pailit).</li>
+                        <li><strong>Suatu Hal Tertentu (Syarat Objektif):</strong> Objek perjanjian harus jelas, spesifik, dapat ditentukan jenisnya, dan dapat dinilai dengan materi.</li>
+                        <li><strong>Suatu Sebab yang Halal (Syarat Objektif):</strong> Isi perjanjian tidak boleh bertentangan dengan undang-undang yang berlaku, ketertiban umum, serta kesusilaan masyarakat.</li>
+                    </ul>
+
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Dampak Pelanggaran Syarat Sah</h3>
+                    <p class="mb-4">Konsekuensi hukum jika syarat sah tersebut tidak terpenuhi terbagi menjadi dua kategori:</p>
+                    <ul class="list-disc pl-6 mb-4 space-y-1">
+                        <li>Jika <strong>syarat subjektif</strong> dilanggar, maka kontrak <em>dapat dibatalkan (voidable)</em> atas permohonan pihak yang dirugikan ke pengadilan.</li>
+                        <li>Jika <strong>syarat objektif</strong> dilanggar, maka kontrak dianggap <em>batal demi hukum (null and void)</em> sejak awal, seolah-olah kontrak tersebut tidak pernah ada.</li>
+                    </ul>
+
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Definisi dan Mekanisme Wanprestasi</h3>
+                    <p class="mb-4">Wanprestasi terjadi ketika salah satu pihak dalam kontrak lalai, sengaja tidak melaksanakan kewajiban (prestasi), atau terlambat memenuhi janji yang telah disepakati bersama.</p>
+
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Contoh Sederhana Sehari-hari</h3>
+                    <div class="bg-blue-50 border-l-4 border-navy-500 p-4 rounded-r-xl my-4">
+                        <p class="text-sm font-medium text-navy-700 mb-1">Studi Kasus: Transaksi Jual-Beli Tanah</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Pak Budi sepakat membeli tanah milik Pak Andi senilai 200 juta rupiah. Perjanjian dibuat tertulis. Namun, setelah Pak Budi melunasi pembayaran, Pak Andi menolak menyerahkan sertifikat tanah. Pak Andi telah melakukan tindakan wanprestasi, dan Pak Budi berhak mengajukan gugatan ke Pengadilan Negeri untuk menuntut penyerahan sertifikat beserta ganti rugi bunga keterlambatan.</p>
+                    </div>
+                `,
+                duration: '4 Sesi Belajar',
+                badge: 'Hot'
+            },
+            {
+                id: 3,
+                title: 'Asas-Asas Hukum Pidana',
+                category: 'Hukum Pidana',
+                desc: 'Mempelajari prinsip dasar legalitas, kesalahan (mens rea), perbuatan pidana (actus reus), dan alasan pemaaf pidana.',
+                longDesc: `
+                    <p class="mb-4">Hukum Pidana bertugas melindungi masyarakat dari tindakan yang merugikan dengan memberikan sanksi berupa penderitaan atau nestapa. Namun, kekuasaan negara dalam menghukum warganya dibatasi oleh asas-asas ketat agar tidak terjadi kesewenang-wenangan aparat penegak hukum.</p>
+                    
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Asas Legalitas: Tiang Utama Peradilan</h3>
+                    <p class="mb-4">Asas legalitas berbunyi <em>"Nullum delictum nulla poena sine praevia lege poenali"</em> (Tiada perbuatan yang dapat dipidana kecuali atas kekuatan aturan pidana yang telah ada sebelum perbuatan dilakukan). Asas yang tercantum dalam Pasal 1 KUHP ini menjamin tiga hal penting:</p>
+                    <ul class="list-disc pl-6 mb-4 space-y-1">
+                        <li><strong>Hukum Harus Tertulis:</strong> Aturan pidana tidak boleh didasarkan pada kebiasaan tak tertulis.</li>
+                        <li><strong>Asas Non-Retroaktif:</strong> Undang-undang pidana dilarang keras diberlakukan surut untuk menghukum tindakan masa lalu.</li>
+                        <li><strong>Larangan Analogi:</strong> Hakim tidak boleh menggunakan penafsiran analogi yang memperluas makna pasal pidana secara paksa.</li>
+                    </ul>
+
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Elemen Kejahatan: Actus Reus vs Mens Rea</h3>
+                    <p class="mb-4">Untuk menyatakan seseorang bersalah melakukan tindak pidana, penuntut umum wajib membuktikan adanya perpaduan dua unsur kumulatif berikut:</p>
+                    <ul class="list-disc pl-6 mb-4 space-y-2">
+                        <li><strong>Actus Reus (Perbuatan Fisik):</strong> Adanya tindakan fisik yang melanggar undang-undang (misal: menusuk, mengambil barang milik orang lain).</li>
+                        <li><strong>Mens Rea (Niat Batin):</strong> Adanya niat jahat atau kelalaian berat dari pelaku saat melakukan tindakan tersebut. Konsep ini sesuai asas <em>"tiada pidana tanpa kesalahan"</em> (animo/kesengajaan).</li>
+                    </ul>
+
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Alasan Pemaaf dan Pembenar</h3>
+                    <p class="mb-4">Ada kondisi di mana perbuatan pidana telah dilakukan, namun pelaku tidak dijatuhi hukuman:</p>
+                    <ul class="list-disc pl-6 mb-4 space-y-1">
+                        <li><strong>Alasan Pembenar:</strong> Menghapus sifat melawan hukum dari perbuatan (misal: bela paksa darurat / <em>noodweer</em> karena diserang perampok).</li>
+                        <li><strong>Alasan Pemaaf:</strong> Menghapus kesalahan subjektif dari pelaku (misal: pelaku mengalami gangguan kejiwaan akut).</li>
+                    </ul>
+
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Contoh Sederhana Sehari-hari</h3>
+                    <div class="bg-blue-50 border-l-4 border-navy-500 p-4 rounded-r-xl my-4">
+                        <p class="text-sm font-medium text-navy-700 mb-1">Studi Kasus: Pengambilan Barang Karena Kekeliruan</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Roni secara tidak sengaja membawa pulang payung hitam milik kafe karena mengira itu payungnya yang memiliki kemiripan warna dan bentuk fisik (ada actus reus). Karena tidak ada niat jahat terencana untuk mencuri (tidak ada mens rea), Roni tidak dapat dipidanakan atas kasus pencurian.</p>
+                    </div>
+                `,
+                duration: '8 Sesi Belajar',
+                badge: 'Penting'
+            },
+            {
+                id: 4,
+                title: 'Hukum Perseroan Terbatas (PT)',
+                category: 'Hukum Dagang',
+                desc: 'Membahas regulasi pendirian badan hukum usaha korporasi, modal, organ direksi, hingga tanggung jawab terbatas.',
+                longDesc: `
+                    <p class="mb-4">Perseroan Terbatas (PT) merupakan pilar utama penggerak perekonomian nasional dan bentuk badan usaha yang paling populer digunakan oleh para pengusaha skala kecil, menengah, hingga konglomerat multinasional.</p>
+                    
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Karakteristik Utama PT Sebagai Badan Hukum</h3>
+                    <p class="mb-4">PT diakui oleh undang-undang sebagai subjek hukum mandiri (<em>persona standi in judicio</em>) yang terpisah dari kepribadian pemiliknya. Karakteristik penting ini mencakup:</p>
+                    <ul class="list-disc pl-6 mb-4 space-y-2">
+                        <li><strong>Tanggung Jawab Terbatas (Limited Liability):</strong> Pemegang saham hanya bertanggung jawab sebesar nilai nominal saham yang mereka tempatkan. Harta pribadi mereka aman dari tuntutan utang korporasi jika PT mengalami kebangkrutan.</li>
+                        <li><strong>Pemisahan Kekayaan:</strong> Harta milik perseroan dikelola secara independen dan terpisah dari harta kekayaan pribadi para pemegang saham atau direksi.</li>
+                        <li><strong>Kelangsungan Hidup Terjamin:</strong> Perubahan susunan pemegang saham tidak memengaruhi eksistensi atau operasi bisnis perseroan.</li>
+                    </ul>
+
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Tiga Organ Vital Perseroan</h3>
+                    <p class="mb-4">Pengambilan keputusan dan operasional di dalam PT digerakkan oleh tiga organ yang memiliki kewenangan mutlak:</p>
+                    <ol class="list-decimal pl-6 mb-4 space-y-2">
+                        <li><strong>Rapat Umum Pemegang Saham (RUPS):</strong> Pemegang kekuasaan tertinggi dalam PT yang berwenang mengambil keputusan besar seperti persetujuan merger, perubahan modal, atau likuidasi.</li>
+                        <li><strong>Direksi:</strong> Organ yang bertanggung jawab penuh atas pengurusan operasional harian perseroan serta mewakili PT baik di dalam maupun di luar pengadilan.</li>
+                        <li><strong>Dewan Komisaris:</strong> Organ yang bertugas melakukan pengawasan terhadap kebijakan Direksi dalam menjalankan perseroan serta memberikan nasihat strategis.</li>
+                    </ol>
+
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Contoh Sederhana Sehari-hari</h3>
+                    <div class="bg-blue-50 border-l-4 border-navy-500 p-4 rounded-r-xl my-4">
+                        <p class="text-sm font-medium text-navy-700 mb-1">Studi Kasus: Batasan Risiko Utang PT</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">PT Maju Mundur mengalami pailit dengan total utang pihak ketiga sebesar 1 Miliar rupiah. Pemegang saham PT tersebut hanya menaruh modal saham senilai 100 juta rupiah. Kreditor hanya berhak menuntut aset milik PT senilai sisa modal yang ada. Rumah pribadi, mobil pribadi, dan rekening pribadi pemegang saham tidak boleh disita untuk melunasi utang 1 Miliar tersebut.</p>
+                    </div>
+                `,
+                duration: '5 Sesi Belajar',
+                badge: 'Populer'
+            },
+            {
+                id: 5,
+                title: 'Hukum Perlindungan Konsumen',
+                category: 'Hukum Dagang',
+                desc: 'Pemahaman hak pembeli serta tanggung jawab pelaku usaha atas ketersediaan jaminan produk aman sesuai undang-undang.',
+                longDesc: `
+                    <p class="mb-4">Di era globalisasi ekonomi dan maraknya e-commerce, kedudukan konsumen sering kali menjadi pihak yang lemah dibandingkan dengan produsen atau pelaku usaha berskala besar yang memiliki kekuatan modal dan informasi produk sepihak.</p>
+                    
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Urgensi Perlindungan Konsumen</h3>
+                    <p class="mb-4">Hukum Perlindungan Konsumen hadir untuk menciptakan keseimbangan hak dan kewajiban antara produsen dan pembeli. Berdasarkan <strong>Undang-Undang Nomor 8 Tahun 1999 tentang Perlindungan Konsumen (UUPK)</strong>, instrumen regulasi ini bertujuan mempromosikan persaingan usaha yang sehat dan menjamin mutu barang konsumsi.</p>
+                    
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Hak-Hak Konstitusional Konsumen</h3>
+                    <p class="mb-4">Setiap pembeli dilindungi oleh undang-undang dengan beberapa hak dasar penting yang wajib dipenuhi oleh produsen:</p>
+                    <ul class="list-disc pl-6 mb-4 space-y-1">
+                        <li><strong>Hak Atas Keamanan dan Keselamatan:</strong> Jaminan bahwa barang/jasa yang dikonsumsi aman bagi jiwa dan kesehatan fisik pembeli.</li>
+                        <li><strong>Hak Atas Informasi Jujur:</strong> Informasi yang jelas mengenai komposisi, khasiat, tanggal kedaluwarsa, dan garansi produk.</li>
+                        <li><strong>Hak untuk Memilih:</strong> Kebebasan menentukan produk tanpa adanya paksaan transaksi bersyarat.</li>
+                        <li><strong>Hak Mendapatkan Ganti Rugi:</strong> Kompensasi finansial atau penukaran barang jika barang yang diterima rusak, cacat produksi, atau tidak sesuai kesepakatan awal.</li>
+                    </ul>
+
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Kewajiban Pelaku Usaha</h3>
+                    <p class="mb-4">UUPK melarang keras pelaku usaha mencantumkan klausul baku yang membatasi tanggung jawab hukum mereka (misal: "Barang yang sudah dibeli tidak dapat ditukar atau dikembalikan") pada nota atau kuitansi pembayaran.</p>
+
+                    <h3 class="text-lg font-bold text-navy-500 mt-6 mb-3">Contoh Sederhana Sehari-hari</h3>
+                    <div class="bg-blue-50 border-l-4 border-navy-500 p-4 rounded-r-xl my-4">
+                        <p class="text-sm font-medium text-navy-700 mb-1">Studi Kasus: Cacat Produksi Alat Elektronik</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Susi membeli sebuah penanak nasi baru dari supermarket. Saat pertama kali dicolokkan ke listrik di rumah, produk tersebut meledak karena korsleting internal dan melukai tangannya. Supermarket dan pabrik produsen penanak nasi wajib mengganti unit produk baru yang aman serta menanggung seluruh biaya pengobatan luka bakar Susi sesuai amanat UUPK.</p>
+                    </div>
+                `,
+                duration: '3 Sesi Belajar',
+                badge: 'Terbaru'
+            }
+        ];
+
+        const articles = [
+            {
+                id: 1,
+                title: 'Menilik Urgensi Perlindungan Data Pribadi di Era AI',
+                category: 'Opini',
+                summary: 'Bagaimana perkembangan pesat kecerdasan buatan menantang regulasi privasi data di Indonesia saat ini?',
+                content: '<p class="mb-4">Kecerdasan Buatan (Artificial Intelligence) telah berkembang dari sekadar alat bantu otomatisasi menjadi entitas analitis yang membutuhkan asupan data raksasa. Pertanyaan besarnya: sejauh mana privasi data pribadi kita aman di hadapan model pemelajaran mesin yang kompleks?</p><p class="mb-4">Indonesia telah mengesahkan Undang-Undang Perlindungan Data Pribadi (UU PDP). Tulisan ini berfokus pada pentingnya pengawasan indeksasi data secara indeks independen dan pemahaman masyarakat mengenai hak-hak datanya di hadapan algoritma AI yang terus berkembang tanpa henti.</p>',
+                date: '12 Juni 2026',
+                author: 'Nayla Azizah'
+            },
+            {
+                id: 2,
+                title: 'Memahami Sengketa Hak Cipta pada Sektor Ekonomi Kreatif',
+                category: 'Kabar Hukum',
+                summary: 'Ulasan mendalam mengenai hak moral, eksploitasi hak ekonomi, dan perlindungan karya seni orisinal digital.',
+                content: '<p class="mb-4">Ekonomi kreatif menyumbang devisa yang signifikan, namun rentan terjadi gesekan hukum kekayaan intelektual (HKI). Banyak pekerja seni digital yang melupakan pentingnya pencatatan karya secara formal, berasumsi bahwa hak cipta terbit otomatis.</p><p class="mb-4">Melalui artikel ini, kami menyoroti perlunya pemahaman matang mengenai hak moral dan hak ekonomi demi mencegah eksploitasi liar karya seni lokal oleh platform luar negeri tanpa lisensi yang sah.</p>',
+                date: '08 Juni 2026',
+                author: 'Zahra Amelia'
+            },
+            {
+                id: 3,
+                title: 'Prinsip Restorative Justice dalam Penyelesaian Kasus Pidana Ringan',
+                category: 'Studi Kasus',
+                summary: 'Menilai efektivitas pendekatan restoratif dalam menciptakan harmoni dan mengurangi overkapasitas lapas.',
+                content: '<p class="mb-4">Penjara yang kelebihan kapasitas (overcrowded) adalah isu kronis sistem peradilan pidana nasional. Salah satu solusi progresif yang didorong oleh Kepolisian dan Kejaksaan Agung saat ini adalah keadilan restoratif (restorative justice).</p><p class="mb-4">Pendekatan ini berfokus pada pemulihan korban, pertanggungjawaban pelaku, serta pemulihan keharmonisan sosial daripada sekadar mengedepankan sanksi pemenjaraan represif pada kasus-kasus pidana ringan.</p>',
+                date: '01 Juni 2026',
+                author: 'Fikri Firdaos'
+            }
+        ];
+
+        const quizzes = [
+            {
+                title: 'Kuis Pengantar Hukum',
+                questions: [
+                    {
+                        q: 'Manakah dari asas hukum berikut yang menyatakan bahwa undang-undang tidak boleh berlaku surut?',
+                        o: ['Asas Legalitas / Non-retroaktif', 'Asas Lex Superior Derogat Legi Inferiori', 'Asas Pacta Sunt Servanda', 'Asas Presumption of Innocence'],
+                        a: 0
+                    },
+                    {
+                        q: 'Sistem hukum yang berkembang di daratan Eropa Kontinental dan bersumber dari kodifikasi hukum tertulis disebut...',
+                        o: ['Sistem Hukum Common Law', 'Sistem Hukum Civil Law', 'Sistem Hukum Adat', 'Sistem Hukum Kanonik'],
+                        a: 1
+                    },
+                    {
+                        q: 'Sumber hukum materiil merujuk pada...',
+                        o: ['Putusan hakim terdahulu', 'Isi atau materi yang memengaruhi pembuatan hukum', 'Lembaran negara resmi', 'Undang-Undang tertulis'],
+                        a: 1
+                    },
+                    {
+                        q: 'Perjanjian internasional yang dibuat secara tertulis antar negara diatur oleh konvensi...',
+                        o: ['Konvensi Wina', 'Konvensi Jenewa', 'Konvensi Hukum Laut PBB', 'Konvensi Den Haag'],
+                        a: 0
+                    },
+                    {
+                        q: 'Siapakah yang dianggap sebagai subjek hukum utama dalam hukum perdata?',
+                        o: ['Hanya orang perorangan (Natuurlijke Persoon)', 'Hanya badan hukum (Rechtspersoon)', 'Orang perorangan dan badan hukum', 'Pemerintah saja'],
+                        a: 2
+                    }
+                ]
+            },
+            {
+                title: 'Kuis Hukum Perdata',
+                questions: [
+                    {
+                        q: 'Pasal KUHPerdata manakah yang mengatur tentang empat syarat sahnya suatu perjanjian?',
+                        o: ['Pasal 1338', 'Pasal 1320', 'Pasal 1243', 'Pasal 1365'],
+                        a: 1
+                    },
+                    {
+                        q: 'Apa akibat hukum apabila syarat objektif perjanjian (hal tertentu / sebab yang halal) tidak terpenuhi?',
+                        o: ['Dapat dibatalkan', 'Batal demi hukum (null and void)', 'Perjanjian tetap berlaku', 'Perjanjian ditangguhkan'],
+                        a: 1
+                    },
+                    {
+                        q: 'Kelalaian atau ingkar janji dari kewajiban yang telah disepakati dalam perjanjian perdata disebut...',
+                        o: ['Wanprestasi', 'Overmacht', 'Onrechtmatige Daad', 'Durslag'],
+                        a: 0
+                    },
+                    {
+                        q: 'Tindakan melanggar hukum yang menimbulkan kerugian bagi orang lain dan mewajibkan pelaku membayar ganti rugi diatur dalam Pasal...',
+                        o: ['Pasal 1365 KUHPerdata (PMH)', 'Pasal 1338 KUHPerdata', 'Pasal 362 KUHP', 'Pasal 1320 KUHPerdata'],
+                        a: 0
+                    },
+                    {
+                        q: 'Berikut ini yang tidak termasuk alasan hapusnya suatu perikatan adalah...',
+                        o: ['Pembayaran', 'Konsinyasi (penitipan)', 'Kematian salah satu pihak tanpa perjanjian pewarisan', 'Pencampuran utang'],
+                        a: 2
+                    }
+                ]
+            },
+            {
+                title: 'Kuis Hukum Pidana',
+                questions: [
+                    {
+                        q: 'Asas dalam hukum pidana yang menyatakan tidak ada pidana tanpa kesalahan disebut...',
+                        o: ['Asas Legalitas', 'Asas Geen Straf Zonder Schuld (Tiada Pidana Tanpa Kesalahan)', 'Asas Presumption of Innocence', 'Asas Ne Bis In Idem'],
+                        a: 1
+                    },
+                    {
+                        q: 'Seseorang tidak dapat dituntut dua kali karena perbuatan yang sama jika putusan pengadilan terdahulu telah berkekuatan hukum tetap. Asas ini disebut...',
+                        o: ['Pacta sunt servanda', 'Ne bis in idem', 'Nullum delictum', 'Lex specialis'],
+                        a: 1
+                    },
+                    {
+                        q: 'Istilah latin untuk unsur perbuatan pidana yang bersifat fisik atau tindakan nyata adalah...',
+                        o: ['Mens Rea', 'Actus Reus', 'Dolus', 'Culpa'],
+                        a: 1
+                    },
+                    {
+                        q: 'Keadaan memaksa yang membuat seseorang terpaksa melakukan tindak pidana demi melindungi diri atau kepentingan umum disebut...',
+                        o: ['Overmacht', 'Noodweer', 'Culpa Lata', 'Dolus Malus'],
+                        a: 0
+                    },
+                    {
+                        q: 'Hukum pidana yang berlaku saat ini mengklasifikasikan tindak pidana menjadi dua kategori besar, yaitu...',
+                        o: ['Kejahatan dan Pelanggaran', 'Pidana Umum dan Pidana Adat', 'Sengaja dan Kelalaian', 'Delik Aduan dan Delik Biasa'],
+                        a: 0
+                    }
+                ]
+            }
+        ];
+
+        // Global Scroll Animation Observer setup
+        let scrollObserver;
+        function initScrollAnimations() {
+            if (scrollObserver) {
+                scrollObserver.disconnect();
+            }
+
+            const options = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.12
+            };
+
+            scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional: unobserve once revealed to save resources
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, options);
+
+            // Re-fetch all dynamic or static elements to reveal
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                // Ensure initial state is unset if not yet active
+                if (!el.classList.contains('active')) {
+                    scrollObserver.observe(el);
+                }
+            });
+        }
+
+        // Dynamic page routing with animations reset
+        function navigateTo(pageId) {
+            // Hide all sections
+            document.querySelectorAll('.page-content').forEach(section => {
+                section.classList.add('hidden');
+                // Temporarily strip dynamic active scroll reveals in hidden pages so they animate again on re-entry
+                section.querySelectorAll('.scroll-reveal').forEach(el => el.classList.remove('active'));
+            });
+            
+            // Show target section
+            const activePage = document.getElementById(`page-${pageId}`);
+            if (activePage) {
+                activePage.classList.remove('hidden');
+                
+                // Force layout recalculation and then trigger scroll observer recalculation
+                setTimeout(() => {
+                    initScrollAnimations();
+                    
+                    // Directly animate the first elements of the entered page for immediate feel
+                    activePage.querySelectorAll('.scroll-reveal').forEach((el, i) => {
+                        if (i < 3) el.classList.add('active');
+                    });
+                }, 50);
+            }
+
+            // Update Navigation Menu Active Styles
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('nav-active');
+            });
+            const activeBtn = document.getElementById(`nav-${pageId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('nav-active');
+            }
+
+            // Scroll to Top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle Mobile Menu Drawer
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = 'fa-solid fa-xmark text-xl';
+            } else {
+                menu.classList.add('hidden');
+                icon.className = 'fa-solid fa-bars text-xl';
+            }
+        }
+
+        function renderMateris() {
+            const container = document.getElementById('materi-grid-container');
+            const featuredContainer = document.getElementById('featured-materi-container');
+            
+            let gridHtml = '';
+            let featuredHtml = '';
+
+            materis.forEach((materi, index) => {
+                const cardMarkup = `
+                    <div class="interactive-card bg-white rounded-2xl border border-grayBorder p-6 shadow-premium flex flex-col justify-between scroll-reveal" style="transition-delay: ${index * 100}ms">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="bg-navy-50 text-navy-500 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">${materi.category}</span>
+                                ${materi.badge ? `<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2.5 py-0.5 rounded-md uppercase tracking-wider">${materi.badge}</span>` : ''}
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-3">${materi.title}</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed mb-6">${materi.desc}</p>
+                        </div>
+                        <div class="border-t border-slate-100 pt-4 flex justify-between items-center mt-auto">
+                            <span class="text-xs text-slate-400 font-medium"><i class="fa-regular fa-clock mr-1.5"></i>${materi.duration}</span>
+                            <button onclick="openMateriDetail(${materi.id})" class="btn-hover text-navy-500 hover:text-navy-600 font-semibold text-sm inline-flex items-center gap-1.5 focus:outline-none">
+                                Baca Selengkapnya <i class="fa-solid fa-angle-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                gridHtml += cardMarkup;
+                
+                // Show first 3 in Featured block on Beranda
+                if (index < 3) {
+                    featuredHtml += cardMarkup;
+                }
+            });
+
+            if (container) container.innerHTML = gridHtml;
+            if (featuredContainer) featuredContainer.innerHTML = featuredHtml;
+            initScrollAnimations();
+        }
+
+        // Dedicated Detail View Router function (No Popups for Materi)
+        function openMateriDetail(id) {
+            const materi = materis.find(m => m.id === id);
+            if (!materi) return;
+
+            // Hide all pages
+            document.querySelectorAll('.page-content').forEach(section => {
+                section.classList.add('hidden');
+                section.querySelectorAll('.scroll-reveal').forEach(el => el.classList.remove('active'));
+            });
+
+            // Populate Content dynamically
+            document.getElementById('materi-detail-breadcrumb').innerText = materi.title;
+            document.getElementById('materi-detail-category').innerText = materi.category;
+            document.getElementById('materi-detail-title').innerText = materi.title;
+            document.getElementById('materi-detail-duration').innerHTML = `<i class="fa-regular fa-clock mr-1.5"></i>${materi.duration}`;
+            document.getElementById('materi-detail-body').innerHTML = materi.longDesc;
+
+            // Show Detail View
+            const detailPage = document.getElementById('page-materi-detail');
+            detailPage.classList.remove('hidden');
+            
+            setTimeout(() => {
+                initScrollAnimations();
+                detailPage.querySelectorAll('.scroll-reveal').forEach(el => el.classList.add('active'));
+            }, 50);
+
+            // Scroll to Top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Return button from Detail view
+        function goBackToMateriList() {
+            navigateTo('materi');
+        }
+
+        // Filter system with animation recalculations
+        function filterMateri() {
+            const searchVal = document.getElementById('materi-search-input').value.toLowerCase();
+            const categoryVal = document.getElementById('materi-category-select').value;
+            const container = document.getElementById('materi-grid-container');
+            const emptyState = document.getElementById('materi-empty-state');
+            
+            let filteredCount = 0;
+            let gridHtml = '';
+
+            materis.forEach((materi, index) => {
+                const matchesSearch = materi.title.toLowerCase().includes(searchVal) || materi.desc.toLowerCase().includes(searchVal);
+                const matchesCategory = categoryVal === 'All' || materi.category === categoryVal;
+
+                if (matchesSearch && matchesCategory) {
+                    filteredCount++;
+                    gridHtml += `
+                        <div class="interactive-card bg-white rounded-2xl border border-grayBorder p-6 shadow-premium flex flex-col justify-between scroll-reveal" style="transition-delay: ${filteredCount * 50}ms">
+                            <div>
+                                <div class="flex justify-between items-start mb-4">
+                                    <span class="bg-navy-50 text-navy-500 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">${materi.category}</span>
+                                    ${materi.badge ? `<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2.5 py-0.5 rounded-md uppercase tracking-wider">${materi.badge}</span>` : ''}
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-800 mb-3">${materi.title}</h3>
+                                <p class="text-slate-500 text-sm leading-relaxed mb-6">${materi.desc}</p>
+                            </div>
+                            <div class="border-t border-slate-100 pt-4 flex justify-between items-center mt-auto">
+                                <span class="text-xs text-slate-400 font-medium"><i class="fa-regular fa-clock mr-1.5"></i>${materi.duration}</span>
+                                <button onclick="openMateriDetail(${materi.id})" class="btn-hover text-navy-500 hover:text-navy-600 font-semibold text-sm inline-flex items-center gap-1.5 focus:outline-none">
+                                    Baca Selengkapnya <i class="fa-solid fa-angle-right text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            container.innerHTML = gridHtml;
+
+            if (filteredCount === 0) {
+                container.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+            } else {
+                container.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+                setTimeout(() => {
+                    initScrollAnimations();
+                    container.querySelectorAll('.scroll-reveal').forEach(el => el.classList.add('active'));
+                }, 50);
+            }
+        }
+
+        function renderArticles() {
+            const container = document.getElementById('articles-grid-container');
+            const featuredContainer = document.getElementById('featured-articles-container');
+            
+            let gridHtml = '';
+            let featuredHtml = '';
+
+            articles.forEach((art, index) => {
+                const cardMarkup = `
+                    <div class="interactive-card bg-white rounded-2xl border border-grayBorder p-6 shadow-premium flex flex-col justify-between scroll-reveal" style="transition-delay: ${index * 100}ms">
+                        <div>
+                            <span class="bg-blue-50 text-blue-600 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-4">${art.category}</span>
+                            <h3 class="text-lg font-bold text-slate-800 mb-3 leading-snug">${art.title}</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed mb-6">${art.summary}</p>
+                        </div>
+                        <div class="border-t border-slate-100 pt-4 flex justify-between items-center mt-auto">
+                            <div class="flex flex-col">
+                                <span class="text-xs font-semibold text-slate-700">${art.author}</span>
+                                <span class="text-[10px] text-slate-400">${art.date}</span>
+                            </div>
+                            <button onclick="openArticleDetail(${art.id})" class="btn-hover text-navy-500 hover:text-navy-600 font-semibold text-sm inline-flex items-center gap-1.5 focus:outline-none">
+                                Baca Artikel <i class="fa-solid fa-angle-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                gridHtml += cardMarkup;
+                
+                if (index < 3) {
+                    featuredHtml += cardMarkup;
+                }
+            });
+
+            if (container) container.innerHTML = gridHtml;
+            if (featuredContainer) featuredContainer.innerHTML = featuredHtml;
+            initScrollAnimations();
+        }
+
+        function filterArticles() {
+            const searchVal = document.getElementById('artikel-search-input').value.toLowerCase();
+            const container = document.getElementById('articles-grid-container');
+            const emptyState = document.getElementById('artikel-empty-state');
+            
+            let filteredCount = 0;
+            let gridHtml = '';
+
+            articles.forEach((art, index) => {
+                if (art.title.toLowerCase().includes(searchVal) || art.summary.toLowerCase().includes(searchVal) || art.author.toLowerCase().includes(searchVal)) {
+                    filteredCount++;
+                    gridHtml += `
+                        <div class="interactive-card bg-white rounded-2xl border border-grayBorder p-6 shadow-premium flex flex-col justify-between scroll-reveal" style="transition-delay: ${filteredCount * 50}ms">
+                            <div>
+                                <span class="bg-blue-50 text-blue-600 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-4">${art.category}</span>
+                                <h3 class="text-lg font-bold text-slate-800 mb-3 leading-snug">${art.title}</h3>
+                                <p class="text-slate-500 text-sm leading-relaxed mb-6">${art.summary}</p>
+                            </div>
+                            <div class="border-t border-slate-100 pt-4 flex justify-between items-center mt-auto">
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-semibold text-slate-700">${art.author}</span>
+                                    <span class="text-[10px] text-slate-400">${art.date}</span>
+                                </div>
+                                <button onclick="openArticleDetail(${art.id})" class="btn-hover text-navy-500 hover:text-navy-600 font-semibold text-sm inline-flex items-center gap-1.5 focus:outline-none">
+                                    Baca Artikel <i class="fa-solid fa-angle-right text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            container.innerHTML = gridHtml;
+
+            if (filteredCount === 0) {
+                container.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+            } else {
+                container.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+                setTimeout(() => {
+                    initScrollAnimations();
+                    container.querySelectorAll('.scroll-reveal').forEach(el => el.classList.add('active'));
+                }, 50);
+            }
+        }
+
+        function openArticleDetail(id) {
+            const item = articles.find(a => a.id === id);
+            if (!item) return;
+
+            document.getElementById('modal-category').innerText = item.category;
+            document.getElementById('modal-title').innerText = item.title;
+            document.getElementById('modal-body-content').innerHTML = `
+                <div class="flex items-center space-x-3 mb-6 bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                    <div class="w-10 h-10 bg-navy-500 rounded-full flex items-center justify-center text-white font-bold text-xs shadow-inner">
+                        ${item.author.split(' ').map(n=>n[0]).join('')}
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-slate-800 leading-tight">${item.author}</p>
+                        <p class="text-xs text-slate-400">Diterbitkan: ${item.date} &bull; Opini Hukum</p>
+                    </div>
+                </div>
+                <div class="prose max-w-none text-slate-600 leading-relaxed">
+                    ${item.content}
+                </div>
+            `;
+
+            const modal = document.getElementById('reader-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modal.children[0].classList.remove('scale-95');
+                modal.children[0].classList.add('scale-100');
+            }, 50);
+        }
+
+        function closeReaderModal() {
+            const modal = document.getElementById('reader-modal');
+            modal.children[0].classList.remove('scale-100');
+            modal.children[0].classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 150);
+        }
+
+        // Custom Toast System (Performance Friendly)
+        function showToast(message, isSuccess = true) {
+            const toast = document.getElementById('custom-toast');
+            const msgBox = document.getElementById('toast-message');
+            const iconBox = document.getElementById('toast-icon-box');
+            const icon = document.getElementById('toast-icon');
+
+            msgBox.innerText = message;
+            if (isSuccess) {
+                iconBox.className = "w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-xs text-white";
+                icon.className = "fa-solid fa-check";
+            } else {
+                iconBox.className = "w-6 h-6 bg-rose-500 rounded-full flex items-center justify-center text-xs text-white";
+                icon.className = "fa-solid fa-exclamation";
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100', 'shadow-glow');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100', 'shadow-glow');
+            }, 3500);
+        }
+
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            showToast('Pesan berhasil terkirim! Tim pengembang HES Academy akan membalas via email Anda dalam kurun waktu 1x24 jam.');
+            document.getElementById('contact-form').reset();
+        }
+
+        let currentQuizIndex = null;
+        let currentQuestionIndex = 0;
+        let quizAnswers = []; 
+
+        function startQuiz(quizIdx) {
+            currentQuizIndex = quizIdx;
+            currentQuestionIndex = 0;
+            quizAnswers = [];
+
+            document.getElementById('quiz-list-view').classList.add('hidden');
+            document.getElementById('quiz-result-view').classList.add('hidden');
+            document.getElementById('quiz-play-view').classList.remove('hidden');
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const quiz = quizzes[currentQuizIndex];
+            const qData = quiz.questions[currentQuestionIndex];
+            
+            document.getElementById('quiz-title-text').innerText = quiz.title;
+            document.getElementById('question-tracker').innerText = `Soal ${currentQuestionIndex + 1} dari ${quiz.questions.length}`;
+            
+            const progPercent = ((currentQuestionIndex + 1) / quiz.questions.length) * 100;
+            document.getElementById('quiz-progress-bar').style.width = `${progPercent}%`;
+
+            document.getElementById('question-text').innerText = qData.q;
+
+            const optionsContainer = document.getElementById('quiz-options-container');
+            optionsContainer.innerHTML = '';
+            
+            qData.o.forEach((opt, idx) => {
+                optionsContainer.innerHTML += `
+                    <button onclick="selectOption(${idx})" id="opt-btn-${idx}" class="quiz-option-btn w-full text-left p-4 rounded-xl border border-slate-200 hover:border-navy-500 hover:bg-navy-50/50 transition-all text-sm font-medium flex items-center justify-between group">
+                        <span class="flex items-center">
+                            <span class="w-8 h-8 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center font-bold mr-4 group-hover:bg-navy-500 group-hover:text-white transition-all">
+                                ${String.fromCharCode(65 + idx)}
+                            </span>
+                            <span class="text-slate-700">${opt}</span>
+                        </span>
+                        <span class="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center transition-all group-hover:border-navy-500" id="opt-circle-${idx}"></span>
+                    </button>
+                `;
+            });
+
+            const nextBtn = document.getElementById('quiz-next-btn');
+            nextBtn.disabled = true;
+            nextBtn.className = "bg-slate-300 text-slate-500 font-semibold py-3 px-6 rounded-xl cursor-not-allowed";
+        }
+
+        function selectOption(idx) {
+            document.querySelectorAll('.quiz-option-btn').forEach(btn => {
+                btn.classList.remove('border-navy-500', 'bg-navy-50');
+            });
+            document.querySelectorAll('.quiz-option-btn > span > .w-8').forEach(span => {
+                span.classList.remove('bg-navy-500', 'text-white');
+            });
+            document.querySelectorAll('.quiz-option-btn > span:last-child').forEach(circle => {
+                circle.innerHTML = '';
+                circle.classList.remove('border-navy-500', 'bg-navy-500');
+            });
+
+            const selectedBtn = document.getElementById(`opt-btn-${idx}`);
+            selectedBtn.classList.add('border-navy-500', 'bg-navy-50');
+            
+            const selectedIcon = selectedBtn.querySelector('.w-8');
+            selectedIcon.classList.add('bg-navy-500', 'text-white');
+
+            const selectedCircle = document.getElementById(`opt-circle-${idx}`);
+            selectedCircle.classList.add('border-navy-500', 'bg-navy-500');
+            selectedCircle.innerHTML = '<i class="fa-solid fa-check text-white text-[10px]"></i>';
+
+            quizAnswers[currentQuestionIndex] = idx;
+
+            const nextBtn = document.getElementById('quiz-next-btn');
+            nextBtn.disabled = false;
+            nextBtn.className = "btn-hover bg-navy-500 text-white font-semibold py-3 px-6 rounded-xl cursor-pointer shadow-md";
+        }
+
+        function nextQuestion() {
+            const quiz = quizzes[currentQuizIndex];
+            
+            if (currentQuestionIndex < quiz.questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                evaluateAndShowResults();
+            }
+        }
+
+        function evaluateAndShowResults() {
+            const quiz = quizzes[currentQuizIndex];
+            let correctCount = 0;
+
+            quiz.questions.forEach((qData, idx) => {
+                if (quizAnswers[idx] === qData.a) {
+                    correctCount++;
+                }
+            });
+
+            const totalScore = Math.round((correctCount / quiz.questions.length) * 100);
+
+            document.getElementById('result-score-text').innerText = totalScore;
+            document.getElementById('result-correct-text').innerText = `${correctCount}/${quiz.questions.length}`;
+
+            document.getElementById('quiz-play-view').classList.add('hidden');
+            document.getElementById('quiz-result-view').classList.remove('hidden');
+
+            showToast('Evaluasi berhasil! Skor Anda telah dicatatkan.');
+        }
+
+        function resetToQuizDashboard() {
+            document.getElementById('quiz-result-view').classList.add('hidden');
+            document.getElementById('quiz-play-view').classList.add('hidden');
+            document.getElementById('quiz-list-view').classList.remove('hidden');
+        }
+
+        // Smart Sticky Navbar state controller
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('main-header');
+            const navContainer = document.getElementById('navbar-container');
+            if (window.scrollY > 40) {
+                header.classList.remove('py-4', 'bg-white/80');
+                header.classList.add('py-2.5', 'bg-white/95', 'shadow-md', 'backdrop-blur-lg');
+            } else {
+                header.classList.remove('py-2.5', 'bg-white/95', 'shadow-md', 'backdrop-blur-lg');
+                header.classList.add('py-4', 'bg-white/80');
+            }
+        });
+
+        // On Load initialization
+        window.onload = function() {
+            renderMateris();
+            renderArticles();
+            navigateTo('home');
+
+            // Fade out the sleek preloader screen once fully loaded
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.classList.add('opacity-0', 'pointer-events-none');
+            }, 600);
+        }
+    </script>
+</body>
+</html>
